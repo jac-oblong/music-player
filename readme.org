@@ -1,0 +1,39 @@
+* Music Player for STM32F769I-DISCO
+
+A very simple music player for the STM32F769I-DISCO board. It uses the SD card for loading music,
+the audio codec for playing the music, the JPEG peripheral for displaying album covers, and the capacitive touch LCD for UI.
+
+** Building/Uploading
+
+This project uses [[https://platformio.org/][PlatformIO]].
+
+#+begin_src bash
+# Build
+pio run -t build
+# Upload
+pio run -t upload
+# Clean
+pio run -t clean
+#+end_src
+
+** Creating a SD Card with Music
+
+The SD card should be formatted as FAT32. Each song should be placed in it's own directory. The
+name of the directories does not matter. Currently, the songs will be played in lexicographical
+order of the directory names.
+
+Directory contents:
+ + ~song.raw~ - The raw song data. Should be signed 16-bit PCM, stereo, 44.1kHz.
+ + ~cover.jpg~ - The album cover. Recommended size if 400x400.
+ + ~meta.txt~ - Text file containing song title and artist. First line is title, second is artist. Newline should be ~\n~ not ~\r\n~.
+
+** TODOs
+
++ More robust error-checking / handling
++ Better UI
+  + Update style to look nicer
+  + Update handling of events to be cleaner
++ Support MP3
+  + Song, info, and cover in one file - Is there an existing format?
++ Support for playlists, shuffling, etc.
+  + Actual stuff that would be expected of music player
